@@ -53,7 +53,7 @@ A private, romantic Progressive Web App (PWA) handcrafted exclusively for **Ouss
 ---
 
 ### ⏳ 6. Relationship Anniversary & Milestones
-- **Anniversary Counter**: Real-time live counter tracking days, hours, minutes, and seconds since **July 5, 2026** (`05/07/2026`).
+- **Anniversary Counter**: Real-time live counter tracking days, hours, minutes, and seconds since **April 6, 2026** (`06/04/2026`).
 - **Milestone Countdown**: Track upcoming birthdays, trips, and special dates with auto-calculating day counters.
 
 ---

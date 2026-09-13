@@ -1,7 +1,7 @@
 // ===================================================================
 // OUSSAMA & NOUHAYLA — PWA Service Worker (Offline Cache, Instant Loading & Push)
 // ===================================================================
-const CACHE_NAME = 'love-v21';
+const CACHE_NAME = 'love-v22';
 const ASSETS = [
     './',
     './index.html',

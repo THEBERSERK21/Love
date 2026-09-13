@@ -35,7 +35,7 @@ let _firebaseReady = false;
 const DEFAULT_PASSCODES = { oussama: "1111", nouhayla: "2222" };
 
 const DEFAULT_TIMELINE = [
-    { id: "t1", date: "2026-07-05", title: "The Day We Met", description: "Destiny brought us together, and from that day on, my life changed forever.", addedBy: "oussama" },
+    { id: "t1", date: "2026-04-06", title: "The Day We Met", description: "Destiny brought us together, and from that day on, my life changed forever.", addedBy: "oussama" },
     { id: "t2", date: "", title: "Our First Laugh", description: "That was the moment I knew — your laughter is the melody my heart had been waiting for.", addedBy: "oussama" },
     { id: "t3", date: "", title: "Falling in Love", description: "It wasn't just a single moment — it was a thousand little moments becoming everything.", addedBy: "oussama" },
     { id: "t4", date: "", title: "Today and Forever", description: "Every day I choose you, and every tomorrow I will choose you again. Always. 💕", addedBy: "oussama" },
@@ -147,12 +147,12 @@ function _lsSet(key, value) {
 
 // ───────── Initialize defaults if first run ─────────
 function _ensureDefaults() {
-    if (!_lsGet("initialized_fresh_v2")) {
+    if (!_lsGet("initialized_fresh_v3")) {
         _lsSet("passcodes", DEFAULT_PASSCODES);
         _lsSet("timeline", DEFAULT_TIMELINE);
         _lsSet("letters", []);
         _lsSet("memories", []);
-        _lsSet("countdowns", [{ id: "main", title: "Together Forever", date: "2026-07-05T00:00:00", type: "since" }]);
+        _lsSet("countdowns", [{ id: "main", title: "Together Forever", date: "2026-04-06T00:00:00", type: "since" }]);
         _lsSet("moods_oussama", []);
         _lsSet("moods_nouhayla", []);
         _lsSet("bucketlist", []);
@@ -162,7 +162,7 @@ function _ensureDefaults() {
         _lsSet("missyou", []);
         _lsSet("presence_oussama", null);
         _lsSet("presence_nouhayla", null);
-        _lsSet("initialized_fresh_v2", true);
+        _lsSet("initialized_fresh_v3", true);
     }
 }
 

@@ -11,8 +11,8 @@ let passcodeBuffer = '';
 let selectedLoginUser = null;
 let countdownInterval = null;
 
-// Anniversary date: 05/07/2026 (July 5, 2026)
-const ANNIVERSARY = new Date('2026-07-05T00:00:00');
+// Anniversary date: 06/04/2026 (April 6, 2026)
+const ANNIVERSARY = new Date('2026-04-06T00:00:00');
 
 // ─── DOM Cache ────────────────────────────────────────────────────
 const $ = (sel) => document.querySelector(sel);
@@ -2101,7 +2101,7 @@ function renderOurStory() {
         <!-- Love letter -->
         <section class="story-section">
             <div class="story-letter glass">
-                <p class="letter-date">July 5, 2026</p>
+                <p class="letter-date">April 6, 2026</p>
                 <h3 class="letter-greeting">My dearest ${greetingName},</h3>
                 ${letterBody}
                 <p class="letter-sign">Yours always & forever&ensp;♥</p>
