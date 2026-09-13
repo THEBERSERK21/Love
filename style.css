@@ -29,15 +29,15 @@
     --gold: #f9ca24;
     --white-soft: rgba(255, 255, 255, 0.92);
 
-    /* Ali accent */
-    --ali-start: #6c5ce7;
-    --ali-end: #a29bfe;
-    --ali-glow: rgba(108, 92, 231, 0.35);
+    /* Oussama accent */
+    --oussama-start: #6c5ce7;
+    --oussama-end: #a29bfe;
+    --oussama-glow: rgba(108, 92, 231, 0.35);
 
-    /* Aya accent */
-    --aya-start: #fd79a8;
-    --aya-end: #fab1a0;
-    --aya-glow: rgba(253, 121, 168, 0.35);
+    /* Nouhayla accent */
+    --nouhayla-start: #fd79a8;
+    --nouhayla-end: #fab1a0;
+    --nouhayla-glow: rgba(253, 121, 168, 0.35);
 
     /* glass */
     --glass-bg: rgba(255, 255, 255, 0.06);
@@ -366,19 +366,19 @@ body {
     font-weight: 500;
 }
 
-.ali-btn:active {
-    border-color: var(--ali-start);
-    box-shadow: 0 0 35px var(--ali-glow);
+.oussama-btn:active {
+    border-color: var(--oussama-start);
+    box-shadow: 0 0 35px var(--oussama-glow);
     transform: scale(0.95);
 }
-.ali-btn:active .user-avatar { transform: scale(1.15); }
+.oussama-btn:active .user-avatar { transform: scale(1.15); }
 
-.aya-btn:active {
-    border-color: var(--aya-start);
-    box-shadow: 0 0 35px var(--aya-glow);
+.nouhayla-btn:active {
+    border-color: var(--nouhayla-start);
+    box-shadow: 0 0 35px var(--nouhayla-glow);
     transform: scale(0.95);
 }
-.aya-btn:active .user-avatar { transform: scale(1.15); }
+.nouhayla-btn:active .user-avatar { transform: scale(1.15); }
 
 /* Passcode keypad — phone style */
 .login-code {
@@ -564,15 +564,15 @@ body {
     margin-bottom: 0.15rem;
 }
 
-.dash-hello .user-ali {
-    background: linear-gradient(135deg, var(--ali-start), var(--ali-end));
+.dash-hello .user-oussama {
+    background: linear-gradient(135deg, var(--oussama-start), var(--oussama-end));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
 }
 
-.dash-hello .user-aya {
-    background: linear-gradient(135deg, var(--aya-start), var(--aya-end));
+.dash-hello .user-nouhayla {
+    background: linear-gradient(135deg, var(--nouhayla-start), var(--nouhayla-end));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;

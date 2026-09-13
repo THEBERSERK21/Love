@@ -2,11 +2,11 @@ const webpush = require('web-push');
 
 const VAPID_PUBLIC_KEY = process.env.VAPID_PUBLIC_KEY || 'BMfXisPqHXuT66gM_US6VxRCdqn3stJX67xFil_mgUh-jA3HnLXkGxdnLat79jn4V3ytWWo3Bht4i_epCpCvisY';
 const VAPID_PRIVATE_KEY = process.env.VAPID_PRIVATE_KEY || 'n1uhr_8kZ2HdM2Ln01HCpRch-rK3tDkuuWCQakvtGs4';
-const VAPID_SUBJECT = 'mailto:contact@ayati.app';
+const VAPID_SUBJECT = 'mailto:contact@love.app';
 
 webpush.setVapidDetails(VAPID_SUBJECT, VAPID_PUBLIC_KEY, VAPID_PRIVATE_KEY);
 
-const FIRESTORE_URL = 'https://firestore.googleapis.com/v1/projects/fatimti/databases/(default)/documents/push_subscriptions';
+const FIRESTORE_URL = 'https://firestore.googleapis.com/v1/projects/oussama-nouhayla/databases/(default)/documents/push_subscriptions';
 
 module.exports = async (req, res) => {
     // CORS headers
@@ -66,10 +66,10 @@ module.exports = async (req, res) => {
 
             const targetSub = JSON.parse(rawSub);
             const payload = JSON.stringify({
-                title: title || 'Ayati 💕',
+                title: title || 'Oussama & Nouhayla 💕',
                 body: msgBody || 'You received new love!',
                 url: url || '/',
-                tag: 'ayati-' + Date.now()
+                tag: 'love-' + Date.now()
             });
 
             await webpush.sendNotification(targetSub, payload);

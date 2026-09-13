@@ -1,5 +1,5 @@
 // ===================================================================
-// AYATI — firebase-config.js
+// OUSSAMA & NOUHAYLA — firebase-config.js
 // Data layer: localStorage (offline) + Firebase Firestore (real-time sync)
 // ===================================================================
 
@@ -7,10 +7,10 @@
 // ║  🔥 FIREBASE SETUP — Follow these steps:                       ║
 // ║                                                                  ║
 // ║  1. Go to https://console.firebase.google.com                   ║
-// ║  2. Click "Add Project" → name it "ayati"                       ║
+// ║  2. Click "Add Project" → name it "oussama-nouhayla"           ║
 // ║  3. Disable Google Analytics (not needed) → Create              ║
 // ║  4. Click the </> (Web) icon to add a web app                   ║
-// ║  5. Name it "ayati" → Register App                              ║
+// ║  5. Name it "oussama-nouhayla" → Register App                  ║
 // ║  6. Copy ONLY the config values below                           ║
 // ║  7. Go to "Build" → "Firestore Database" → "Create Database"   ║
 // ║  8. Choose "Start in test mode" → pick nearest region → Done   ║
@@ -18,12 +18,13 @@
 // ╚══════════════════════════════════════════════════════════════════╝
 
 const FIREBASE_CONFIG = {
-    apiKey: "AIzaSyCcPZvpCh3qpXYyWyRZ-J5TzeOW5BjEiz0",
-    authDomain: "fatimti.firebaseapp.com",
-    projectId: "fatimti",
-    storageBucket: "fatimti.firebasestorage.app",
-    messagingSenderId: "601798823214",
-    appId: "1:601798823214:web:7f81744a946b4e21a77ebf"
+    apiKey: "AIzaSyBwNdpa6purgEzcPviU3Ok4Vne7Tw6NJ-I",
+    authDomain: "oussama-nouhayla.firebaseapp.com",
+    databaseURL: "https://oussama-nouhayla-default-rtdb.europe-west1.firebasedatabase.app",
+    projectId: "oussama-nouhayla",
+    storageBucket: "oussama-nouhayla.firebasestorage.app",
+    messagingSenderId: "15928219807",
+    appId: "1:15928219807:web:2816c51527cf890d476aaa"
 };
 
 // ───────── Internal state ─────────
@@ -31,13 +32,13 @@ let _db = null;
 let _firebaseReady = false;
 
 // ───────── Default data ─────────
-const DEFAULT_PASSCODES = { ali: "1111", aya: "2222" };
+const DEFAULT_PASSCODES = { oussama: "1111", nouhayla: "2222" };
 
 const DEFAULT_TIMELINE = [
-    { id: "t1", date: "2026-07-05", title: "The Day We Met", description: "Destiny brought us together, and from that day on, my life changed forever.", addedBy: "ali" },
-    { id: "t2", date: "", title: "Our First Laugh", description: "That was the moment I knew — your laughter is the melody my heart had been waiting for.", addedBy: "ali" },
-    { id: "t3", date: "", title: "Falling in Love", description: "It wasn't just a single moment — it was a thousand little moments becoming everything.", addedBy: "ali" },
-    { id: "t4", date: "", title: "Today and Forever", description: "Every day I choose you, and every tomorrow I will choose you again. Always. 💕", addedBy: "ali" },
+    { id: "t1", date: "2026-07-05", title: "The Day We Met", description: "Destiny brought us together, and from that day on, my life changed forever.", addedBy: "oussama" },
+    { id: "t2", date: "", title: "Our First Laugh", description: "That was the moment I knew — your laughter is the melody my heart had been waiting for.", addedBy: "oussama" },
+    { id: "t3", date: "", title: "Falling in Love", description: "It wasn't just a single moment — it was a thousand little moments becoming everything.", addedBy: "oussama" },
+    { id: "t4", date: "", title: "Today and Forever", description: "Every day I choose you, and every tomorrow I will choose you again. Always. 💕", addedBy: "oussama" },
 ];
 
 const DEFAULT_LOVE_QUOTES = [
@@ -56,7 +57,7 @@ const DEFAULT_LOVE_QUOTES = [
 // ───────── Initialize Firebase (if configured) ─────────
 async function _initFirebase() {
     try {
-        const savedFB = localStorage.getItem("ayati_fb_config");
+        const savedFB = localStorage.getItem("love_fb_config");
         if (savedFB) {
             Object.assign(FIREBASE_CONFIG, JSON.parse(savedFB));
         }
@@ -96,7 +97,7 @@ function _openIDB() {
     return new Promise((resolve) => {
         if (_idb) return resolve(_idb);
         if (!window.indexedDB) return resolve(null);
-        const req = indexedDB.open("ayati_idb", 1);
+        const req = indexedDB.open("love_idb", 1);
         req.onupgradeneeded = (e) => {
             e.target.result.createObjectStore("kv");
         };
@@ -113,7 +114,7 @@ async function _idbSet(key, value) {
     if (!db) return;
     return new Promise((resolve) => {
         const tx = db.transaction("kv", "readwrite");
-        tx.objectStore("kv").put(value, `ayati_${key}`);
+        tx.objectStore("kv").put(value, `love_${key}`);
         tx.oncomplete = resolve;
     });
 }
@@ -123,7 +124,7 @@ async function _idbGet(key) {
     if (!db) return null;
     return new Promise((resolve) => {
         const tx = db.transaction("kv", "readonly");
-        const req = tx.objectStore("kv").get(`ayati_${key}`);
+        const req = tx.objectStore("kv").get(`love_${key}`);
         req.onsuccess = () => resolve(req.result || null);
         req.onerror = () => resolve(null);
     });
@@ -131,13 +132,13 @@ async function _idbGet(key) {
 
 function _lsGet(key) {
     try {
-        return JSON.parse(localStorage.getItem(`ayati_${key}`)) || null;
+        return JSON.parse(localStorage.getItem(`love_${key}`)) || null;
     } catch { return null; }
 }
 
 function _lsSet(key, value) {
     try {
-        localStorage.setItem(`ayati_${key}`, JSON.stringify(value));
+        localStorage.setItem(`love_${key}`, JSON.stringify(value));
     } catch (e) {
         console.warn(`localStorage quota hit for ${key}, backing up to IndexedDB`);
     }
@@ -146,22 +147,22 @@ function _lsSet(key, value) {
 
 // ───────── Initialize defaults if first run ─────────
 function _ensureDefaults() {
-    if (!_lsGet("initialized_fresh_v1")) {
+    if (!_lsGet("initialized_fresh_v2")) {
         _lsSet("passcodes", DEFAULT_PASSCODES);
         _lsSet("timeline", DEFAULT_TIMELINE);
         _lsSet("letters", []);
         _lsSet("memories", []);
         _lsSet("countdowns", [{ id: "main", title: "Together Forever", date: "2026-07-05T00:00:00", type: "since" }]);
-        _lsSet("moods_ali", []);
-        _lsSet("moods_aya", []);
+        _lsSet("moods_oussama", []);
+        _lsSet("moods_nouhayla", []);
         _lsSet("bucketlist", []);
         _lsSet("lovenotes", []);
         _lsSet("voicenotes", []);
         _lsSet("daily_answers", []);
         _lsSet("missyou", []);
-        _lsSet("presence_ali", null);
-        _lsSet("presence_aya", null);
-        _lsSet("initialized_fresh_v1", true);
+        _lsSet("presence_oussama", null);
+        _lsSet("presence_nouhayla", null);
+        _lsSet("initialized_fresh_v2", true);
     }
 }
 
@@ -188,19 +189,19 @@ const DataStore = {
 
     // ─── Auth / Session ───────────────────────────────────
     getUser() {
-        return localStorage.getItem("ayati_user") || null;
+        return localStorage.getItem("love_user") || null;
     },
 
     setUser(username) {
-        localStorage.setItem("ayati_user", username);
+        localStorage.setItem("love_user", username);
     },
 
     clearUser() {
-        localStorage.removeItem("ayati_user");
+        localStorage.removeItem("love_user");
     },
 
     getPartner(user) {
-        return user === "ali" ? "aya" : "ali";
+        return user === "oussama" ? "nouhayla" : "oussama";
     },
 
     getPasscodes() {

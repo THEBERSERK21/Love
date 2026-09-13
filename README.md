@@ -1,16 +1,16 @@
-# Ayati 💕 — Our Love Story
+# Oussama & Nouhayla 💕 — Our Love Story
 
-A private, romantic Progressive Web App (PWA) handcrafted exclusively for **Ali & Aya**. Built with a dark glassmorphic iOS aesthetic, real-time dual-device synchronization, lock-screen Apple Web Push notifications, offline caching, and interactive romantic relationship tools.
+A private, romantic Progressive Web App (PWA) handcrafted exclusively for **Oussama & Nouhayla**. Built with a dark glassmorphic iOS aesthetic, real-time dual-device synchronization, lock-screen Apple Web Push notifications, offline caching, and interactive romantic relationship tools.
 
 ---
 
 ## ✨ Features Overview
 
 ### 🔐 1. Private Dual-PIN Authentication
-- **Tailored Profiles**: Independent login portals for **Ali 💙** and **Aya 💗**.
+- **Tailored Profiles**: Independent login portals for **Oussama 💙** and **Nouhayla 💗**.
 - **Default PINs**:
-  - Ali: `1111`
-  - Aya: `2222`
+  - Oussama: `1111`
+  - Nouhayla: `2222`
 - **Dynamic Theming**: The app automatically tunes its ambient neon glow and accents depending on who is logged in.
 - **PIN Customization**: Change your PIN anytime in `⚙️ Settings`.
 
@@ -67,7 +67,7 @@ A private, romantic Progressive Web App (PWA) handcrafted exclusively for **Ali 
 ### 😊 8. Daily Mood Tracker & Check-in
 - Check in your daily emotional mood with romantic emojis (💖, 🥰, 😊, 😴, 🥺, etc.).
 - The dashboard highlights your partner's current mood in real time.
-- View monthly mood history for both Ali and Aya.
+- View monthly mood history for both Oussama and Nouhayla.
 
 ---
 
@@ -119,7 +119,7 @@ A private, romantic Progressive Web App (PWA) handcrafted exclusively for **Ali 
 2. Tap the **Share button** (square with an up arrow at the bottom).
 3. Scroll down and tap **"Add to Home Screen"** (**Ajouter sur l'écran d'accueil**).
 4. Tap **Add** in the top-right corner.
-5. Launch **Ayati** directly from your Home Screen — it will run full-screen without any browser address bars!
+5. Launch **Oussama & Nouhayla** directly from your Home Screen — it will run full-screen without any browser address bars!
 6. Tap **⚙️ Settings** → **"🔔 Turn On Notifications"** to enable lock-screen alerts.
 
 ---
@@ -154,4 +154,4 @@ Then visit `http://localhost:8080` in your browser.
 
 ---
 
-*Handcrafted with ❤️ for Ali & Aya.*
+*Handcrafted with ❤️ for Oussama & Nouhayla.*

@@ -1,7 +1,7 @@
 // ===================================================================
-// AYATI — PWA Service Worker (Offline Cache, Instant Loading & Push)
+// OUSSAMA & NOUHAYLA — PWA Service Worker (Offline Cache, Instant Loading & Push)
 // ===================================================================
-const CACHE_NAME = 'ayati-v19';
+const CACHE_NAME = 'love-v21';
 const ASSETS = [
     './',
     './index.html',
@@ -55,7 +55,7 @@ self.addEventListener('fetch', (e) => {
 
 // Push notification event (Lock screen alerts on iOS 16.4+ / Android)
 self.addEventListener('push', (event) => {
-    let data = { title: 'Ayati 💕', body: 'You received a new love message!' };
+    let data = { title: 'Oussama & Nouhayla 💕', body: 'You received a new love message!' };
     try {
         if (event.data) data = event.data.json();
     } catch (e) {
@@ -67,13 +67,13 @@ self.addEventListener('push', (event) => {
         icon: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">💕</text></svg>',
         badge: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">💖</text></svg>',
         vibrate: [200, 100, 200],
-        tag: data.tag || 'ayati-notification',
+        tag: data.tag || 'love-notification',
         renotify: true,
         data: { url: data.url || '/' }
     };
 
     event.waitUntil(
-        self.registration.showNotification(data.title || 'Ayati 💕', options)
+        self.registration.showNotification(data.title || 'Oussama & Nouhayla 💕', options)
     );
 });
 

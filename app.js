@@ -1,11 +1,11 @@
 /* ===================================================================
-   AYATI — app.js
+   OUSSAMA & NOUHAYLA — app.js
    Relationship keeper: router, auth, all features
    DataStore is loaded globally from firebase-config.js
    =================================================================== */
 
 // ─── State ────────────────────────────────────────────────────────
-let currentUser = null;   // "ali" | "aya"
+let currentUser = null;   // "oussama" | "nouhayla"
 let currentView = 'login';
 let passcodeBuffer = '';
 let selectedLoginUser = null;
@@ -61,8 +61,8 @@ const $$ = (sel) => document.querySelectorAll(sel);
 function updateThemeColor(user) {
     const meta = $('meta[name="theme-color"]');
     if (!meta) return;
-    if (user === 'ali') meta.content = '#2d132c';
-    else if (user === 'aya') meta.content = '#3b0a30';
+    if (user === 'oussama') meta.content = '#2d132c';
+    else if (user === 'nouhayla') meta.content = '#3b0a30';
     else meta.content = '#1a0a1e';
 }
 
@@ -271,7 +271,7 @@ function setupNavigation() {
         SoundFX.pop();
         triggerLoveBurstAnim();
         const partner = DataStore.getPartner(currentUser);
-        const myName = currentUser === 'ali' ? 'Ali 💙' : 'Aya 💗';
+        const myName = currentUser === 'oussama' ? 'Oussama 💙' : 'Nouhayla 💗';
         await DataStore.add('missyou', {
             from: currentUser,
             to: partner
@@ -350,7 +350,7 @@ function setupLogin() {
         btn.addEventListener('click', () => {
             triggerHaptic('medium');
             selectedLoginUser = btn.dataset.user;
-            const name = selectedLoginUser === 'ali' ? 'Ali 💙' : 'Aya 💗';
+            const name = selectedLoginUser === 'oussama' ? 'Oussama 💙' : 'Nouhayla 💗';
             $('#login-code-prompt').textContent = `Welcome ${name} — Enter your PIN`;
             $('#login-select').hidden = true;
             $('#login-code').hidden = false;
@@ -436,10 +436,10 @@ function verifyPasscode() {
 // ===================================================================
 function loadDashboard() {
     const partner = DataStore.getPartner(currentUser);
-    const isAli = currentUser === 'ali';
-    const name = isAli ? 'Ali' : 'Aya';
-    const partnerName = isAli ? 'Aya' : 'Ali';
-    const cssClass = isAli ? 'user-ali' : 'user-aya';
+    const isOussama = currentUser === 'oussama';
+    const name = isOussama ? 'Oussama' : 'Nouhayla';
+    const partnerName = isOussama ? 'Nouhayla' : 'Oussama';
+    const cssClass = isOussama ? 'user-oussama' : 'user-nouhayla';
 
     // Greeting
     $('#dash-hello').innerHTML = `Welcome <span class="${cssClass}">${name}</span> 💕`;
@@ -449,10 +449,10 @@ function loadDashboard() {
     const days = Math.floor(diff / 86400000);
     $('#dash-days').textContent = `${days} days of love together 💕`;
 
-    // Dynamic "For Aya" / "For Ali" feature button label
+    // Dynamic "For Nouhayla" / "For Oussama" feature button label
     const ourstoryLabel = $('#dash-ourstory-label');
     if (ourstoryLabel) {
-        ourstoryLabel.textContent = isAli ? 'For Ali' : 'For Aya';
+        ourstoryLabel.textContent = isOussama ? 'For Oussama' : 'For Nouhayla';
     }
 
     // Update presence
@@ -541,7 +541,7 @@ async function loadLetters() {
 
     container.innerHTML = letters.map(l => {
         const isUnread = l.to === currentUser && !l.read;
-        const fromName = l.from === 'ali' ? 'Ali 💙' : 'Aya 💗';
+        const fromName = l.from === 'oussama' ? 'Oussama 💙' : 'Nouhayla 💗';
         const date = new Date(l.createdAt).toLocaleDateString('en-US', { day: 'numeric', month: 'short' });
         const isLocked = l.unlockDate && (new Date(l.unlockDate).getTime() > Date.now()) && l.to === currentUser;
         const unlockFormatted = l.unlockDate ? new Date(l.unlockDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : '';
@@ -588,7 +588,7 @@ async function openLetter(id) {
         await DataStore.update('letters', id, { read: true });
     }
 
-    const fromName = letter.from === 'ali' ? 'Ali 💙' : 'Aya 💗';
+    const fromName = letter.from === 'oussama' ? 'Oussama 💙' : 'Nouhayla 💗';
     const date = new Date(letter.createdAt).toLocaleDateString('en-US', {
         day: 'numeric', month: 'long', year: 'numeric'
     });
@@ -611,7 +611,7 @@ async function openLetter(id) {
 
 function createLetterForm() {
     const partner = DataStore.getPartner(currentUser);
-    const partnerName = partner === 'ali' ? 'Ali' : 'Aya';
+    const partnerName = partner === 'oussama' ? 'Oussama' : 'Nouhayla';
     return `
         <h3 class="modal-title">Write a letter to ${partnerName} 💌</h3>
         <div class="form-group">
@@ -847,7 +847,7 @@ function getMoodLabel(emoji) {
 async function loadMood() {
     const container = $('#mood-content');
     const partner = DataStore.getPartner(currentUser);
-    const partnerName = partner === 'ali' ? 'Ali 💙' : 'Aya 💗';
+    const partnerName = partner === 'oussama' ? 'Oussama 💙' : 'Nouhayla 💗';
 
     const todayMood = await DataStore.getTodayMood(currentUser);
     const partnerMood = await DataStore.getTodayMood(partner);
@@ -909,7 +909,7 @@ async function loadMood() {
             triggerHaptic('light');
             SoundFX.pop();
             await DataStore.setMood(currentUser, emoji);
-            const myName = currentUser === 'ali' ? 'Ali' : 'Aya';
+            const myName = currentUser === 'oussama' ? 'Oussama' : 'Nouhayla';
             sendRemotePushNotification(partner, 'Daily Mood Check-in 😊', `${myName} checked in their mood: ${emoji}`);
             toast(`${emoji} Checked in!`);
             container.querySelectorAll('.mood-btn').forEach(b => b.classList.remove('selected'));
@@ -936,7 +936,7 @@ async function loadBucketList() {
     }
 
     container.innerHTML = items.map(item => {
-        const by = item.addedBy === 'ali' ? 'Ali' : 'Aya';
+        const by = item.addedBy === 'oussama' ? 'Oussama' : 'Nouhayla';
         return `
             <div class="bucket-item glass ${item.completed ? 'done' : ''}" data-bucket-id="${item.id}">
                 <span class="bucket-check">✓</span>
@@ -1042,7 +1042,7 @@ async function loadLoveNotes() {
     }
 
     container.innerHTML = allNotes.map(n => {
-        const from = n.from === 'ali' ? 'Ali 💙' : 'Aya 💗';
+        const from = n.from === 'oussama' ? 'Oussama 💙' : 'Nouhayla 💗';
         const date = new Date(n.createdAt).toLocaleDateString('en-US', { day: 'numeric', month: 'short' });
         return `
             <div class="lovenote-item glass">
@@ -1105,8 +1105,8 @@ async function loadDailyQuestion() {
     const today = getTodayQuestion();
     const allAnswers = await DataStore.getAll('dailyanswers');
     const partner = DataStore.getPartner(currentUser);
-    const partnerName = partner === 'ali' ? 'Ali 💙' : 'Aya 💗';
-    const myName = currentUser === 'ali' ? 'Ali 💙' : 'Aya 💗';
+    const partnerName = partner === 'oussama' ? 'Oussama 💙' : 'Nouhayla 💗';
+    const myName = currentUser === 'oussama' ? 'Oussama 💙' : 'Nouhayla 💗';
 
     const myAnswer = allAnswers.find(a => a.questionId === today.id && a.user === currentUser);
     const partnerAnswer = allAnswers.find(a => a.questionId === today.id && a.user === partner);
@@ -1175,7 +1175,7 @@ async function loadDailyQuestion() {
                     <h5 style="font-size:0.95rem;margin-bottom:0.6rem;color:var(--white-soft);">${g.text || ''}</h5>
                     ${g.answers.map(ans => `
                         <div style="font-size:0.85rem;color:rgba(255,255,255,0.75);margin-top:0.3rem;padding-left:0.6rem;border-left:2px solid var(--blush);">
-                            <strong>${ans.user === 'ali' ? 'Ali 💙' : 'Aya 💗'}:</strong> ${ans.text}
+                            <strong>${ans.user === 'oussama' ? 'Oussama 💙' : 'Nouhayla 💗'}:</strong> ${ans.text}
                         </div>
                     `).join('')}
                 </div>`;
@@ -1197,7 +1197,7 @@ async function loadDailyQuestion() {
             text
         });
         const partner = DataStore.getPartner(currentUser);
-        const myName = currentUser === 'ali' ? 'Ali' : 'Aya';
+        const myName = currentUser === 'oussama' ? 'Oussama' : 'Nouhayla';
         sendRemotePushNotification(partner, 'Question of the Day ❓', `${myName} answered today's couple question! Check it out 💕`);
         toast('Answer saved! 💕');
         loadDailyQuestion();
@@ -1290,7 +1290,7 @@ async function loadVoiceNotes() {
     }
 
     container.innerHTML = notes.map(n => {
-        const fromName = n.from === 'ali' ? 'Ali 💙' : 'Aya 💗';
+        const fromName = n.from === 'oussama' ? 'Oussama 💙' : 'Nouhayla 💗';
         const date = new Date(n.createdAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
         const durationStr = n.duration ? `${n.duration}s` : 'Voice memo';
         return `
@@ -1354,13 +1354,13 @@ function createVoiceRecorderForm() {
 }
 
 function createSettingsForm() {
-    const isAli = currentUser === 'ali';
+    const isOussama = currentUser === 'oussama';
     const currentCode = DataStore.getPasscodes()[currentUser] || '1111';
     const notifGranted = 'Notification' in window && Notification.permission === 'granted';
     return `
         <h3 class="modal-title">Settings ⚙️</h3>
         <div class="form-group">
-            <label class="form-label">Change PIN (${isAli ? 'Ali 💙' : 'Aya 💗'})</label>
+            <label class="form-label">Change PIN (${isOussama ? 'Oussama 💙' : 'Nouhayla 💗'})</label>
             <input class="form-input" id="setting-passcode" type="password" maxlength="4" placeholder="4 digits" value="${currentCode}" style="text-align:center;letter-spacing:4px;font-size:1.2rem;" />
         </div>
         <button class="form-submit" id="save-passcode">Save PIN 💕</button>
@@ -1370,7 +1370,7 @@ function createSettingsForm() {
         <div class="form-group">
             <label class="form-label">🔔 Push Notifications</label>
             <p style="font-size:0.78rem;color:rgba(255,255,255,0.5);margin-bottom:0.8rem;">
-                Get lock-screen alerts when ${isAli ? 'Aya' : 'Ali'} sends you love letters, notes, or misses you.
+                Get lock-screen alerts when ${isOussama ? 'Nouhayla' : 'Oussama'} sends you love letters, notes, or misses you.
             </p>
             <button class="form-submit" id="toggle-notifications" style="background:linear-gradient(135deg, #e84393, #6c5ce7);">
                 ${notifGranted ? '🔔 Notifications Active (Tap to Test)' : '🔔 Turn On Notifications'}
@@ -1412,7 +1412,7 @@ function attachFormHandlers() {
         const unlockDate = $('#letter-unlock-date')?.value || null;
         if (!content) return;
         const partner = DataStore.getPartner(currentUser);
-        const myName = currentUser === 'ali' ? 'Ali' : 'Aya';
+        const myName = currentUser === 'oussama' ? 'Oussama' : 'Nouhayla';
         await DataStore.add('letters', {
             content,
             unlockDate,
@@ -1510,7 +1510,7 @@ function attachFormHandlers() {
         const content = $('#lovenote-content')?.value.trim();
         if (!content) return;
         const partner = DataStore.getPartner(currentUser);
-        const myName = currentUser === 'ali' ? 'Ali' : 'Aya';
+        const myName = currentUser === 'oussama' ? 'Oussama' : 'Nouhayla';
         await DataStore.add('lovenotes', {
             content,
             from: currentUser,
@@ -1610,7 +1610,7 @@ function attachFormHandlers() {
     $('#save-voicenote')?.addEventListener('click', async () => {
         if (!_recordedBase64) return;
         const partner = DataStore.getPartner(currentUser);
-        const myName = currentUser === 'ali' ? 'Ali' : 'Aya';
+        const myName = currentUser === 'oussama' ? 'Oussama' : 'Nouhayla';
         await DataStore.add('voicenotes', {
             audio: _recordedBase64,
             duration: _recordSeconds,
@@ -1630,7 +1630,7 @@ function attachFormHandlers() {
         if (code && code.length === 4) {
             const passcodes = DataStore.getPasscodes();
             passcodes[currentUser] = code;
-            localStorage.setItem('ayati_passcodes', JSON.stringify(passcodes));
+            localStorage.setItem('love_passcodes', JSON.stringify(passcodes));
             triggerHaptic('success');
             closeModal();
             toast('PIN updated successfully 🔒');
@@ -1642,7 +1642,7 @@ function attachFormHandlers() {
     // Toggle Notifications
     $('#toggle-notifications')?.addEventListener('click', async () => {
         if ('Notification' in window && Notification.permission === 'granted') {
-            sendSystemNotification('Ayati 💕', 'Notifications are active! You will get alerts on your lock screen.');
+            sendSystemNotification('Oussama & Nouhayla 💕', 'Notifications are active! You will get alerts on your lock screen.');
             toast('Test alert sent! 🔔');
         } else {
             await requestNotificationPermission(true);
@@ -1940,7 +1940,7 @@ async function requestNotificationPermission(showToast = true) {
     return false;
 }
 
-function sendSystemNotification(title, body, tag = 'ayati-notification') {
+function sendSystemNotification(title, body, tag = 'love-notification') {
     if (!('Notification' in window) || Notification.permission !== 'granted') return;
     try {
         if (navigator.serviceWorker && navigator.serviceWorker.controller) {
@@ -1974,7 +1974,7 @@ function setupRealtimeNotifications() {
     DataStore.listen('missyou', (pings) => {
         if (!currentUser) return;
         const partner = DataStore.getPartner(currentUser);
-        const partnerName = partner === 'ali' ? 'Ali 💙' : 'Aya 💗';
+        const partnerName = partner === 'oussama' ? 'Oussama 💙' : 'Nouhayla 💗';
         const latest = pings.find(p => p.to === currentUser && p.createdAt > lastCheckedTime);
         if (latest) {
             lastCheckedTime = Math.max(lastCheckedTime, latest.createdAt);
@@ -1986,7 +1986,7 @@ function setupRealtimeNotifications() {
     DataStore.listen('letters', (letters) => {
         if (!currentUser) return;
         const partner = DataStore.getPartner(currentUser);
-        const partnerName = partner === 'ali' ? 'Ali 💙' : 'Aya 💗';
+        const partnerName = partner === 'oussama' ? 'Oussama 💙' : 'Nouhayla 💗';
         const newLetter = letters.find(l => l.to === currentUser && !l.read && l.createdAt > lastCheckedTime);
         if (newLetter) {
             sendSystemNotification('New Love Letter 💌', `A new letter from ${partnerName} arrived!`, 'letter');
@@ -1997,7 +1997,7 @@ function setupRealtimeNotifications() {
     DataStore.listen('lovenotes', (notes) => {
         if (!currentUser) return;
         const partner = DataStore.getPartner(currentUser);
-        const partnerName = partner === 'ali' ? 'Ali 💙' : 'Aya 💗';
+        const partnerName = partner === 'oussama' ? 'Oussama 💙' : 'Nouhayla 💗';
         const newNote = notes.find(n => n.to === currentUser && n.createdAt > lastCheckedTime);
         if (newNote) {
             sendSystemNotification('Sweet Words 💕', `${partnerName} sent you a sweet note!`, 'note');
@@ -2005,7 +2005,7 @@ function setupRealtimeNotifications() {
     });
 
     // Real-time Partner Mood updates
-    const partnerKey = currentUser === 'ali' ? 'aya' : 'ali';
+    const partnerKey = currentUser === 'oussama' ? 'nouhayla' : 'oussama';
     DataStore.listen(`moods_${partnerKey}`, (moods) => {
         if (!currentUser) return;
         const today = new Date().toISOString().split('T')[0];
@@ -2018,21 +2018,21 @@ function setupRealtimeNotifications() {
 }
 
 // ===================================================================
-// OUR STORY (Dynamic: Aya sees "For Aya", Ali sees "For Ali")
+// OUR STORY (Dynamic: Nouhayla sees "For Nouhayla", Oussama sees "For Oussama")
 // ===================================================================
 function renderOurStory() {
-    const isAya = currentUser === 'aya';
+    const isNouhayla = currentUser === 'nouhayla';
     const titleEl = $('#ourstory-header-title');
     const container = $('#ourstory-content');
     if (!container) return;
 
     if (titleEl) {
-        titleEl.textContent = isAya ? '🌹 For Aya' : '🌹 For Ali';
+        titleEl.textContent = isNouhayla ? '🌹 For Nouhayla' : '🌹 For Oussama';
     }
 
-    const name = isAya ? 'Aya' : 'Ali';
-    const greetingName = isAya ? 'Aya' : 'Ali';
-    const letterBody = isAya
+    const name = isNouhayla ? 'Nouhayla' : 'Oussama';
+    const greetingName = isNouhayla ? 'Nouhayla' : 'Oussama';
+    const letterBody = isNouhayla
         ? `<p class="letter-body">
                 Every day with you feels like a dream I never want to wake up from.
                 You are my sunshine, my brightest star — the reason my heart beats.
@@ -2050,7 +2050,7 @@ function renderOurStory() {
                 I fall in love with you more and more every single day.
            </p>`;
 
-    const reasons = isAya ? [
+    const reasons = isNouhayla ? [
         { icon: '✨', text: 'Your smile lights up my whole world' },
         { icon: '🌙', text: 'You make every ordinary moment feel magical' },
         { icon: '🦋', text: 'Every time I see you, I still get butterflies' },
@@ -2066,7 +2066,7 @@ function renderOurStory() {
         { icon: '🤍', text: 'You are my prince, my rock, and my forever home' }
     ];
 
-    const promiseText = isAya
+    const promiseText = isNouhayla
         ? `I promise to cherish you on your best days and stand by you through the hardest.<br />
            I promise to be your calm in every storm, and your warmth in every winter.<br />
            I promise to never stop choosing you — today, tomorrow, and forever.`
@@ -2074,7 +2074,7 @@ function renderOurStory() {
            I promise to always be your peace, your biggest cheerleader, and your loyal partner.<br />
            I promise to hold your hand through everything life brings our way.`;
 
-    const signText = isAya ? '— With all my love, for Aya 💗' : '— With all my heart, for Ali 💙';
+    const signText = isNouhayla ? '— With all my love, for Nouhayla 💗' : '— With all my heart, for Oussama 💙';
 
     container.innerHTML = `
         <!-- Splash section -->
